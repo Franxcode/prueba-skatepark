@@ -18,7 +18,7 @@ const eliminarUser = (event, id) => {
         );
         setTimeout(()=> {
             window.location.href = 'registro';
-        },3000)
+        },2000)
         }
     });
 };

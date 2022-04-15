@@ -59,6 +59,11 @@ app.get('/', validateJWT, async (req, res) => {
     }
 });
 
+app.get('/logout', (req, res) => {
+    res.clearCookie(SESSIONCOOKIE);
+    res.redirect('/login');
+});
+
 app.get('/datos', validateJWT, async (req, res) => {
     const id = req.userId;
     const user = await getUserById(id);
@@ -148,12 +153,15 @@ app.post('/login', async (req, res) => {
         if (user && user.email) {
 
             const token = jwt.sign({
-                exp: Math.floor(Date.now() / 1000) + 1800,
+                exp: Math.floor(Date.now() / 1000) + 120,
                 userId: user.id,
                 isAdmin: user.is_admin
             },
             process.env.SECRETKEY);
-            res.cookie(SESSIONCOOKIE,token).redirect('/datos');
+            res.cookie(SESSIONCOOKIE,token, {
+                maxAge: 300000,
+                secure: true,
+            }).redirect('/datos');
         }else{
             res.status(400).render('login', {
                 error: 'Usuario o contrasena invalida.'
