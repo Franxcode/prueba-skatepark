@@ -9,7 +9,9 @@
     <div class="py-5">
       <h2>Iniciar Sesión</h2>
       <hr class="w-50" />
-
+      {{#if error}}
+      <div class="alert alert-danger">{{ error }}</div>
+      {{/if}}
       <form action="/login" method="post">
         <div class="form-group">
           <div class="form-group">
