@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> head }}
+  </head>
+  <body>
+    <h1>Skate Park</h1>
+    <div class="py-4">
+      <h2>Lista de participantes</h2>
+      <hr />
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Foto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Años de experiencia</th>
+            <th scope="col">Especialidad</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each users}}
+          <tr>
+            <th scope="row">{{counter @index}}</th>
+            <td><img src="/assets/uploads/{{this.foto}}" width="70" height="70"></td>
+            <td>{{this.nombre}}</td>
+            <td>{{this.anos_experiencia}}</td>
+            <td>{{this.especialidad}}</td>
+            {{#if this.estado}}
+            <td class="text-success font-weight-bold">Aprobado</td>
+            {{else}}
+            <td class="text-warning font-weight-bold">En Revision</td>
+            {{/if}}
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <a href="/login">Iniciar Sesión</a> |
+      <a href="/registro">Registrarme</a>
+    </div>
+    {{> footer }}
+    <script src="/assets/index.js"></script>
+  </body>
+</html>

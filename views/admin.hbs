@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> head }}
+  </head>
+  <body>
+    <h1>Skate Park</h1>
+
+    <div class="py-4">
+      <h2>Administración</h2>
+      <hr class="w-50" />
+
+      <table class="table w-50 m-auto">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Foto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Años de experiencia</th>
+            <th scope="col">Especialidad</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each users}}
+          <tr>
+            <th scope="row">{{counter @index}}</th>
+            <td><img src="/assets/uploads/{{this.foto}}" width="70" height="70"></td>
+            <td>{{this.nombre}}</td>
+            <td>{{this.anos_experiencia}}</td>
+            <td>{{this.especialidad}}</td>
+            <td>
+              <form action="/admin" method="post">
+              <input type="hidden" name="id" value={{this.id}}>
+              <input type="checkbox" name="estado" {{#if this.estado}}checked{{/if}} />
+              </form>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    {{> footer }}
+    <script>
+      document.querySelectorAll('input[type=checkbox]').forEach(input => {
+        input.addEventListener('change', (e) => {
+          e.target.form.submit();
+        });
+      })
+    </script>
+  </body>
+</html>
