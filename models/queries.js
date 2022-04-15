@@ -120,22 +120,21 @@ const updateStatus = async (id, status) => {
         return error;
     }
 };
-// const deleteUser = async (id) => {
-//     try {
-//         const client = new Client({
-//             connectionString: process.env.DATABASE_URL,
-//             ssl: {
-//                 rejectUnauthorized: false
-//             }
-//         });
-//         await client.connect();
-//         const result = await client.query(`DELETE FROM users WHERE id = '${id}'`);
-//         await client.end();
-//         return result.rowCount;
-//     } catch (error) {
-//         return error;
-//     }
-// };
+const deleteUser = async (id) => {
+    try {
+        const client = new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false
+            }
+        });
+        await client.connect();
+        const result = await client.query(`DELETE FROM skaters WHERE id = '${id}'`);
+        return result.rowCount;
+    } catch (error) {
+        return error;
+    }
+};
 
 module.exports = {
     insertUser,
@@ -143,6 +142,6 @@ module.exports = {
     getUser,
     getUserById,
     updateUser,
-    updateStatus
-    // deleteUser
+    updateStatus,
+    deleteUser
 }

@@ -36,8 +36,12 @@
           {{/each}}
         </tbody>
       </table>
+      {{#if users}}
+      <a href="/datos" class="btn btn-success">Modificar Datos</a>
+      {{else}}
       <a href="/login">Iniciar Sesión</a> |
       <a href="/registro">Registrarme</a>
+      {{/if}}
     </div>
     {{> footer }}
     <script src="/assets/index.js"></script>

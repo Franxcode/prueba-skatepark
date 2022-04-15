@@ -39,14 +39,14 @@
             <input class="form-control m-auto" value="{{user.especialidad}}" name="especialidad"/>
           </div>
         </div>
-        <div class="mb-1">
-          <button type="submit" class="btn btn-primary">Actualizar</button>
-        </div>
-        <div>
-          <button class="btn btn-danger">Eliminar cuenta</button>
+        <div class="d-flex justify-content-center my-3">
+        <div class="mx-3"><button type="submit" class="btn btn-primary">Actualizar</button></div>
+        <div class="mx-3"><button class="btn btn-danger" onclick="eliminarUser(event, {{user.id}});">Eliminar cuenta</button></div>
+        <div class="mx-3"><a href="/" class="btn btn-info">Ver Usuarios</a></div>
         </div>
       </form>
     </div>
     {{> footer }}
+    <script src="/assets/js/delete.js"></script>
   </body>
 </html>

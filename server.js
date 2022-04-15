@@ -9,7 +9,7 @@ const expressFileUpload = require('express-fileupload');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 
-const { insertUser, getUsers, getUser, getUserById, updateUser, updateStatus } = require('./models/queries');
+const { insertUser, getUsers, getUser, getUserById, updateUser, updateStatus, deleteUser } = require('./models/queries');
 
 const SESSIONCOOKIE = 'session';
 // Handlebars
@@ -98,6 +98,25 @@ app.post('/datos', validateJWT, async (req, res) => {
         });
     }
 
+});
+
+app.delete('/datos/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const response = await deleteUser(id);
+        if (response > 0) {
+            res.render('registro', {
+                message: 'Exito'
+            });
+            return;
+        }else{
+            res.status(500).render('datos', {
+                error: 'Contacte al Administrador.'
+            });
+        }
+    } catch (error) {
+        return error;
+    }
 });
 
 app.get('/admin', validateJWT, async (req, res) => {
