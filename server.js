@@ -110,10 +110,8 @@ app.delete('/datos/:id', async (req, res) => {
     try {
         const response = await deleteUser(id);
         if (response > 0) {
-            res.render('registro', {
-                message: 'Exito'
-            });
-            return;
+            res.clearCookie(SESSIONCOOKIE);
+            res.redirect('/registro');
         }else{
             res.status(500).render('datos', {
                 error: 'Contacte al Administrador.'
